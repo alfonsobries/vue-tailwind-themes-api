@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CssClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -9,31 +10,15 @@ class CssAutocompleteController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $this->validate($request, ['q' => 'string|required']);
+        $this->validate($request, ['q' => 'string|required', 'limit' => 'nullable|number']);
 
-        $query = $request->input('q');
+        $q = $request->input('q');
+        $limit = $request->input('limit', 50);
 
-        $str = Http::get('https://unpkg.com/tailwindcss@^1.0/dist/tailwind.css')->body();
-
-        $re = '/\.(-?[_a-zA-Z]+([_a-zA-Z0-9-\\\\\/s]|(\\\\:))*)[~\>\s:a-zA-Z\(\)]*\{/m';
-
-        preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
-        
-        $allCssClasses = collect($matches)->pluck(1)
-            ->map(function ($className) {
-                $className = trim($className);
-                $className = str_replace('\:', ':', trim($className));
-                $className = str_replace('\/', '/', trim($className));
-                return $className;
-            })->unique();
-
-
-        // @TODO: Implement real searching
-        $results = [$allCssClasses->first(function ($value) use ($query) {
-            return $value === $query;
-        })];
-            
-
-        return $results;
+        return CssClass::where('name', 'like', $q . '%')
+            ->select('name')
+            ->limit($limit)
+            ->get()
+            ->pluck('name');
     }
 }

@@ -2,40 +2,32 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\CssClass;
 use Tests\TestCase;
 
 class CssAutocompleteControllerTest extends TestCase
 {
-    /** @test  */
-    public function it_find_uncommon_css_classes()
+    /** @test */
+    public function it_return_css_class_names_that_starts_with_the_query()
     {
-        $classses = collect([
-            '-mt-12',
-            'w-1/12',
-            'placeholder-blue-200',
-            'sm:-m-12',
-            'md:-translate-y-8',
-            'lg:hover:-translate-x-40',
-            'lg:placeholder-yellow-500',
-            'lg:w-2/12',
-            '-translate-x-1/2',
-            'xl:placeholder-purple-200',
+        factory(CssClass::class)->createMany([
+            ['name' => '-mt-12'],
+            ['name' => 'lg:w-2/12'],
+            ['name' => 'md:-translate-y-8'],
+            ['name' => 'xl:placeholder-purple-200'],
+            ['name' => 'lg:placeholder-yellow-500'],
         ]);
 
-        // @TODO: Mock css file
-        
-        $classses->each(function ($className) {
-            $data = [
-                'q' => $className
-            ];
-            
-            $response = $this
-                ->getJson(route('cssautocomplete', $data))
-                ->assertSuccessful();
-            
-            $this->assertContains($className, $response->json());
-        });
+        $response = $this->getJson(route('cssautocomplete', ['q' => 'lg:']));
+        $response->assertJson(['lg:w-2/12', 'lg:placeholder-yellow-500']);
+
+        $response = $this->getJson(route('cssautocomplete', ['q' => '-']));
+        $response->assertJson(['-mt-12']);
+
+        $response = $this->getJson(route('cssautocomplete', ['q' => 'md:']));
+        $response->assertJson(['md:-translate-y-8']);
+
+        $response = $this->getJson(route('cssautocomplete', ['q' => 'w-2']));
+        $response->assertJson([]);
     }
 }
