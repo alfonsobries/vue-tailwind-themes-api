@@ -13,7 +13,7 @@ class CssAutocompleteController extends Controller
         $this->validate($request, ['q' => 'string|required', 'limit' => 'nullable|number']);
 
         $q = $request->input('q');
-        $limit = $request->input('limit', 50);
+        $limit = $request->input('limit', 15);
 
         return CssClass::where('name', 'like', $q . '%')
             ->select('name')
