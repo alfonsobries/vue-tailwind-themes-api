@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', 'vue-tailwind-themes-api.test'),
+    'domain' => env('SESSION_DOMAIN', '.vue-tailwind-themes-api.test'),
 
     /*
     |--------------------------------------------------------------------------

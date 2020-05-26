@@ -13,6 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/allgood', function () {
-    return 'All good!'
-});
+Route::get('/allgood', 'AllgoodController');
