@@ -94,4 +94,16 @@ class ThemeControlllerTest extends TestCase
             ->deleteJson(route('themes.destroy', $theme))
             ->assertForbidden();
     }
+
+    /** @test */
+    public function a_theme_can_be_fetched_by_slug()
+    {
+        $theme = factory(Theme::class)->create();
+
+        $response = $this
+            ->getJson(route('themes.show', $theme->slug))
+            ->assertSuccessful();
+
+        $this->assertEquals($theme->id, $response->json('id'));
+    }
 }

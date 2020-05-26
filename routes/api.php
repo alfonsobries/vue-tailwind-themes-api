@@ -7,9 +7,14 @@ Auth::routes();
 
 Route::get('/css-autocomplete', 'CssAutocompleteController')->name('cssautocomplete');
 
+Route::get('themes', 'ThemeController@index')->name('themes.index');
+Route::get('themes/{theme}', 'ThemeController@show')->name('themes.show');
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
   Route::get('/user', 'AccountController@show');
 
-  Route::resource('themes', 'ThemeController');
+  Route::post('themes', 'ThemeController@store')->name('themes.store');
+  Route::delete('themes/{theme}', 'ThemeController@destroy')->name('themes.destroy');
+  Route::put('themes/{theme}', 'ThemeController@update')->name('themes.update');
 });
 
