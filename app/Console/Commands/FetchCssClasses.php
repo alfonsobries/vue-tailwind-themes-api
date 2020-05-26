@@ -23,22 +23,12 @@ class FetchCssClasses extends Command
      */
     protected $description = 'Refresh the list of CSS Classes';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    public function fetchCssFileContents()
+    protected function fetchCssFileContents()
     {
         return Http::get('https://unpkg.com/tailwindcss@^1.0/dist/tailwind.css')->body();
     }
 
-    public function extractCssClasses()
+    protected function extractCssClasses()
     {
         $css = $this->fetchCssFileContents();
 
@@ -56,7 +46,7 @@ class FetchCssClasses extends Command
             })->unique();
     }
 
-    public function storeClasses(Collection $cssClasses)
+    protected function storeClasses(Collection $cssClasses)
     {
         $ids = $cssClasses->map(function ($className) {
             $existingClass = CssClass::where('name', $className)->select('id')->first();

@@ -15,7 +15,10 @@ class FetchCssClassesTest extends TestCase
 
         $command = Mockery::mock('\App\Console\Commands\FetchCssClasses[fetchCssFileContents]');
 
-        $command->shouldReceive('fetchCssFileContents')->once()->andReturn($this->testCssFileContents());
+        $command
+            ->shouldAllowMockingProtectedMethods()
+            ->shouldReceive('fetchCssFileContents')
+            ->andReturn($this->testCssFileContents());
 
         $this->app[Kernel::class]->registerCommand($command);
     }
@@ -44,7 +47,7 @@ class FetchCssClassesTest extends TestCase
         });
     }
 
-    private function testCssFileContents()
+    public function testCssFileContents()
     {
         $file = base_path('tests/fixtures/example.css');
 
