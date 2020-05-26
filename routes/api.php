@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/css-autocomplete', 'CssAutocompleteController')->name('cssautocomplete');
 
+Auth::routes();
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
