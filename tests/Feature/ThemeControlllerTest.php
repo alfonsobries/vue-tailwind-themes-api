@@ -81,7 +81,7 @@ class ThemeControlllerTest extends TestCase
             ->deleteJson(route('themes.destroy', $theme))
             ->assertSuccessful();
 
-        $this->assertNull($theme->fresh());
+        $this->assertTrue($theme->fresh()->trashed());
     }
 
     /** @test */

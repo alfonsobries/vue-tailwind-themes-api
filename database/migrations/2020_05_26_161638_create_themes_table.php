@@ -17,9 +17,11 @@ class CreateThemesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->string('description');
             $table->longText('settings');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
         });
