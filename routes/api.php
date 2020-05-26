@@ -7,4 +7,9 @@ Auth::routes();
 
 Route::get('/css-autocomplete', 'CssAutocompleteController')->name('cssautocomplete');
 
-Route::middleware('auth:sanctum')->get('/user', 'AccountController@show');
+Route::group(['middleware' => 'auth:sanctum'], function () {
+  Route::get('/user', 'AccountController@show');
+
+  Route::resource('themes', 'ThemeController');
+});
+
