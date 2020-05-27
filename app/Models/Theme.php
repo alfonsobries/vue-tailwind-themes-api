@@ -17,6 +17,10 @@ class Theme extends Model
         'settings',
     ];
 
+    protected $casts = [
+        'settings' => 'json',
+    ];
+
     /**
      * Return the sluggable configuration array for this model.
      *

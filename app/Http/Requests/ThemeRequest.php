@@ -40,6 +40,7 @@ class ThemeRequest extends FormRequest
             ],
             'settings' => [
                 'required',
+                'array',
                 $this->theme ? 'sometimes' : null,
             ],
         ];

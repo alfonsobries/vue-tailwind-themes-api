@@ -13,6 +13,6 @@ $factory->define(Theme::class, function (Faker $faker) {
         },
         'name' => $faker->sentence(2),
         'description' => $faker->sentence(12),
-        'settings' => '{}',
+        'settings' => [[]],
     ];
 });

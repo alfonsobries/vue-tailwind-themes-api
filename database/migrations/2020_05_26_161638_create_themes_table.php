@@ -19,7 +19,7 @@ class CreateThemesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('description');
-            $table->longText('settings');
+            $table->json('settings');
             $table->timestamps();
             $table->softDeletes();
 
