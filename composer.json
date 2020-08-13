@@ -7,6 +7,12 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://satis.mailcoach.app"
+        }
+    ],
     "require": {
         "php": "^7.2.5",
         "cviebrock/eloquent-sluggable": "^7.0",
@@ -16,7 +22,8 @@
         "laravel/framework": "^7.0",
         "laravel/sanctum": "^2.3",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0"
+        "laravel/ui": "^2.0",
+        "spatie/laravel-mailcoach": "^2.0.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -61,6 +68,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag mailcoach-assets --force"
         ]
     }
 }
