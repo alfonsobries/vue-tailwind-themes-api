@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'newsletter_admin' => [
+            'driver' => 'session',
+            'provider' => 'newsletter_admins',
+        ],
     ],
 
     /*
@@ -71,10 +76,10 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'newsletter_admins' => [
+             'driver' => 'eloquent',
+             'model' => App\Models\NewsletterAdmin::class,
+         ],
     ],
 
     /*

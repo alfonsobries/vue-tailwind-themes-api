@@ -18,6 +18,10 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        if ($auth = Auth::guard('newsletter_admin')->check()) {
+            return redirect('mailcoach');
+        }
+
         if (Auth::guard($guard)->check()) {
             return redirect(RouteServiceProvider::HOME);
         }
