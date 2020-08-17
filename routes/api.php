@@ -10,6 +10,9 @@ Route::get('/css-autocomplete', 'CssAutocompleteController')->name('cssautocompl
 Route::get('themes', 'ThemeController@index')->name('themes.index');
 Route::get('themes/{theme}', 'ThemeController@show')->name('themes.show');
 
+Route::post('newsletter/subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
+Route::post('newsletter/unsubscribe', 'NewsletterController@unsubscribe')->name('newsletter.unsubscribe');
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
   Route::get('/user', 'AccountController@show');
 
