@@ -110,7 +110,7 @@ return [
     /*
      * Unauthorized users will get redirected to this route.
      */
-    'redirect_unauthorized_users_to_route' => 'newsletter_admin.login',
+    'redirect_unauthorized_users_to_route' => 'newsletter_admin.login.show',
 
     /*
      *  This configuration option defines the authentication guard that will
