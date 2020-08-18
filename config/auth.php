@@ -38,18 +38,13 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'newsletter_admins',
         ],
 
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
             'hash' => false,
-        ],
-
-        'newsletter_admin' => [
-            'driver' => 'session',
-            'provider' => 'newsletter_admins',
         ],
     ],
 
