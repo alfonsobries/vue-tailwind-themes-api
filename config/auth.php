@@ -38,13 +38,18 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'newsletter_admins',
+            'provider' => 'users',
         ],
 
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
             'hash' => false,
+        ],
+
+        'newsletter_admin' => [
+            'driver' => 'session',
+            'provider' => 'newsletter_admins',
         ],
     ],
 
@@ -71,10 +76,10 @@ return [
             'model' => App\User::class,
         ],
 
-         'newsletter_admins' => [
-             'driver' => 'eloquent',
-             'model' => App\Models\NewsletterAdmin::class,
-         ],
+        'newsletter_admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\NewsletterAdmin::class,
+        ],
     ],
 
     /*
