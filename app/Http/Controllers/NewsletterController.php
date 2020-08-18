@@ -10,18 +10,15 @@ class NewsletterController extends Controller
 {
     public function subscribe(NewsletterSubscribeRequest $request)
     {
-        $emailList = EmailList::firstOrCreate([
-            'name' => 'newsletter',
-            'requires_confirmation' => true,
-        ]);
+        $emailList = EmailList::where(['name' => 'newsletter'])->first();
 
-        $emailList->subscribe($request->input('email'));
+        return $emailList->subscribe($request->input('email'));
     }
 
     public function unsubscribe(NewsletterUnsubscribeRequest $request)
     {
         $emailList = EmailList::where(['name' => 'newsletter'])->first();
 
-        $emailList->unsubscribe($request->input('email'));
+        return $emailList->unsubscribe($request->input('email'));
     }
 }
