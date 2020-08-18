@@ -14,3 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/allgood', 'AllgoodController');
+
+Route::get('/newsletter-admin/login', 'Auth\LoginController@showNewsletterAdminLoginForm')->name('newsletter_admin.login.show');
+Route::post('/newsletter-admin/login', 'Auth\LoginController@newsletterAdminLogin')->name('newsletter_admin.login');
+Route::post('/newsletter-admin/logout', 'Auth\LoginController@newsletterAdminLogout')->name('newsletter_admin.logout');
