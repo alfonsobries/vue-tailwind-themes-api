@@ -64,7 +64,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->is('mailcoach') || $request->is('mailcoach/*')) {
-            return redirect()->guest(route('newsletter_admin.login'));
+            return redirect()->guest(route('newsletter_admin.login.show'));
         }
 
         return $request->expectsJson()
