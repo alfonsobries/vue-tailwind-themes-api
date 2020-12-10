@@ -25,7 +25,7 @@ class FetchCssClasses extends Command
 
     protected function fetchCssFileContents()
     {
-        return Http::get('https://unpkg.com/tailwindcss@^1.0/dist/tailwind.css')->body();
+        return Http::get('https://unpkg.com/tailwindcss@^2.0/dist/tailwind.css')->body();
     }
 
     protected function extractCssClasses()
